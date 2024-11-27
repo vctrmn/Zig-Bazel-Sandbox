@@ -1,4 +1,4 @@
-const hello = @import("utils/hello.zig");
+const printHelloWorld = @import("utils/hello.zig").printHelloWorld;
 const base32 = @import("base32_module");
 const yaml = @import("zig_yaml_module");
 const std = @import("std");
@@ -42,7 +42,7 @@ pub fn main() !void {
         \\           21 ]
     ;
 
-    try hello.printHelloWorld();
+    try printHelloWorld();
     try parseAndPrintYaml(allocator, source);
     try encodeString();
 }
