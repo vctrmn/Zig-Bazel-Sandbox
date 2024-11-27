@@ -1,0 +1,5 @@
+{
+    "editor.formatOnSave": true,
+    "zig.path": "${workspaceFolder}/zig-wrapper.sh",
+    "zig.initialSetupDone": true,
+}

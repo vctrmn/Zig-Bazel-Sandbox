@@ -1,0 +1,34 @@
+load("@rules_zig//zig:defs.bzl", "zig_binary", "zig_module")
+
+package(default_visibility = ["//visibility:public"])
+
+# zig_library(
+#     name = "base32-lib",
+#     main = "@base32_archive//:src/base32.zig",
+#     visibility = ["//visibility:public"],
+#     deps = ["@base32_archive"],
+# )
+
+zig_module(
+    name = "base32_module",
+    main = "@base32_archive//:src/base32.zig",
+    visibility = ["//visibility:public"],
+    deps = ["@base32_archive"],
+)
+
+zig_module(
+    name = "zig_yaml_module",
+    main = "@zig_yaml_repo//:src/yaml.zig",
+    visibility = ["//visibility:public"],
+    deps = ["@zig_yaml_repo"],
+)
+
+zig_binary(
+    name = "binary",
+    srcs = glob(["src/**/*.zig"]),
+    main = "src/main.zig",
+    deps = [
+        ":base32_module",
+        ":zig_yaml_module",
+    ],
+)

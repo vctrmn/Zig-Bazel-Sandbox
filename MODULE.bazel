@@ -1,0 +1,26 @@
+"""
+This module sets up a zig project sandbox.
+"""
+
+module(
+    name = "zig_sandbox",
+    version = "1.0.0",
+)
+
+# Include rules_zig for Zig support in Bazel
+# https://github.com/aherrmann/rules_zig/releases
+bazel_dep(name = "rules_zig", version = "0.6.0")
+
+# Define Zig toolchains
+ZIG_VERSION = "0.13.0"
+zig = use_extension("@rules_zig//zig:extensions.bzl", "zig")
+zig.toolchain(zig_version = ZIG_VERSION)
+use_repo(zig, "zig_toolchains")
+
+# Include the base32 library as an external dependency
+base32_archive = use_extension("//third_party/base32:extensions.bzl", "base32_archive")
+use_repo(base32_archive, "base32_archive")
+
+# Include the zig-yaml library as an external dependency
+zig_yaml_repo = use_extension("//third_party/zig_yaml:extensions.bzl", "zig_yaml_repo")
+use_repo(zig_yaml_repo, "zig_yaml_repo")
